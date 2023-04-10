@@ -3,9 +3,6 @@
 #include "Servo.h"
 #include "Button.h"
 
-//Data Sheet Link:
-//chrome-extension://bdfcnmeidppjeaggnmidamkiddifkdib/viewer.html?file=https://www.infineon.com/dgdl/Infineon-Component_I2C_LCD_V1.10-Software%20Module%20Datasheets-v01_02-EN.pdf?fileId=8ac78c8c7d0d8da4017d0e9cfdee232b
-
 Servo servoArm; //servo that will turn off the switch
 Servo servoLift; //servo that will lift the lid of the box
 
