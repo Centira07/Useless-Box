@@ -10,12 +10,12 @@ int swhPin = 3; //digital pin for toggle switch
 int armPin = 4; //digital pin for the Servo motor that turns off the switch
 int liftPin = 5; //digital pin for the Servo motor that lifts the lid
 
-int pos_arm_start = 0; // resting position of arm servo
+int pos_arm_start = 180; // resting position of arm servo
 int pos_lift_start = 0; // resting position of lift servo
 int pos_arm; // current position of arm servo
 int pos_lift; // current position of lift servo
-int pos_arm_switch = 180; // position of arm servo to turn off switch
-int pos_lift_open = 180; // position of lift servo to open box
+int pos_arm_switch = 20; // position of arm servo to turn off switch
+int pos_lift_open = 90; // position of lift servo to open box
 
 unsigned long timerStart = 0;
 unsigned long currentTime = 0;
@@ -38,7 +38,7 @@ void close() {
 void hitSwitch() {
   servoArm.write(pos_arm_switch);
   delay(1000);
-  servoArm.write(pos_arm);
+  servoArm.write(pos_arm_start);
   delay(1000);
   close();
 }
@@ -144,9 +144,9 @@ void lcdEmotion(int count) {
       lcd.setCursor(0,1);
       lcd.print("final warning!!");
       delay(4000);
+      lcd.clear();
       break;
     case 7: //final straw
-      lcd.clear();
       lcd.setCursor(3,0);
       lcd.print("Gone on a");
       lcd.setCursor(4,1);
@@ -172,14 +172,14 @@ void setup() {
   lcd.backlight();
   servoArm.attach(armPin); //setting pin for the arm servo
   servoLift.attach(liftPin); //setting pin for the lift servo
-  servoArm.write(pos_arm_start);
-  servoLift.write(pos_lift_start);
+  servoArm.write(180);
+  servoLift.write(0);
 }
 
 void loop() {
   switch_state = digitalRead(swhPin);
   Serial.println(switch_state);
-  if (switch_state == HIGH) {
+  if (switch_state == LOW) {
     timeCount = currentTime - timerStart;
     if (counter == 1)  {
       counter = 2;    
