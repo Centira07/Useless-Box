@@ -75,7 +75,7 @@ void lcdEmotion(int count) {
     case 2: //first switch
       lcd.clear();
       lcd.setCursor(0,0);
-      lcd.print("Who did that");
+      lcd.print("Who did that?");
       delay(1000);
       open();
       lcd.clear();
@@ -83,7 +83,7 @@ void lcdEmotion(int count) {
       lcd.print("Please don't");
       lcd.setCursor(0,1);
       lcd.print("do that again");
-      delay(4000);
+      delay(1000);
       break;
     case 3: //second switch
       lcd.clear();
@@ -98,7 +98,7 @@ void lcdEmotion(int count) {
       lcd.print("I am pleading");
       lcd.setCursor(0,1);
       lcd.print("to not do that");
-      delay(4000);
+      delay(1000);
       break;
     case 4: // first warning
       lcd.clear();
@@ -113,7 +113,7 @@ void lcdEmotion(int count) {
       lcd.print("I am warning");
       lcd.setCursor(0,1);
       lcd.print("you this time");
-      delay(4000);
+      delay(1000);
       break;
     case 5: //second warning
       lcd.clear();
@@ -128,7 +128,7 @@ void lcdEmotion(int count) {
       lcd.print("This will be");
       lcd.setCursor(0,1);
       lcd.print("your 2nd warning");
-      delay(4000);
+      delay(1000);
       break;
     case 6: //final warning
       lcd.clear();
@@ -143,7 +143,7 @@ void lcdEmotion(int count) {
       lcd.print("This is your");
       lcd.setCursor(0,1);
       lcd.print("final warning!!");
-      delay(4000);
+      delay(1000);
       lcd.clear();
       break;
     case 7: //final straw
@@ -183,19 +183,19 @@ void loop() {
     timeCount = currentTime - timerStart;
     if (counter == 1)  {
       counter = 2;    
-    } else if (timeCount <= 10000 && counter == 2) {
+    } else if (timeCount <= 60000 && counter == 2) {
       counter = 3;
-    } else if (timeCount <= 10000 && counter == 3) {
+    } else if (timeCount <= 60000 && counter == 3) {
       counter = 4;
-    } else if (timeCount <= 10000 && counter == 4) {
+    } else if (timeCount <= 60000 && counter == 4) {
       counter = 5;
-    } else if (timeCount <= 10000 && counter == 5) {
+    } else if (timeCount <= 60000 && counter == 5) {
       counter = 6;
-    } else if (timeCount <= 10000 && counter == 6) {
+    } else if (timeCount <= 60000 && counter == 6) {
       counter = 7;
-    } else if (timeCount > 10000 && counter < 7) {
+    } else if (timeCount > 60000 && counter <= 6) {
       counter = 1;
-    } else if (timeCount >= 120000 && counter == 7) {
+    } else if (timeCount >= 300000 && counter == 7) {
       counter = 1;
     } else {
       currentTime = millis();      
@@ -204,11 +204,11 @@ void loop() {
     timerStart = millis();
   } else {
     currentTime = millis();
-    if (timeCount < 120000 && counter == 7) {
+    if (timeCount < 300000 && counter == 7) {
       lcdEmotion(7);
       timeCount = currentTime - timerStart;
     } else {
-      lcdEmotion(1);   
+      lcdEmotion(1);
     }
   }
 }
