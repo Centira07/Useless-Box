@@ -20,7 +20,7 @@ int pos_lift_open = 90; // position of lift servo to open box
 unsigned long timerStart = 0;
 unsigned long currentTime = 0;
 int counter = 1;
-int timeCount = 0;
+unsigned long timeCount = 0;
 int switch_state = 0;
 
 LiquidCrystal_I2C lcd(0x27,16,2);
