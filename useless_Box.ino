@@ -178,35 +178,36 @@ void setup() {
 
 void loop() {
   switch_state = digitalRead(swhPin);
-  Serial.println(switch_state);
+  currentTime = millis();
+  timeCount = currentTime - timerStart;
+  Serial.println(counter);
+
   if (switch_state == LOW) {
     timeCount = currentTime - timerStart;
     if (counter == 1)  {
       counter = 2;    
-    } else if (timeCount <= 60000 && counter == 2) {
+    } else if (timeCount < 60000 && counter == 2) {
       counter = 3;
-    } else if (timeCount <= 60000 && counter == 3) {
+    } else if (timeCount < 60000 && counter == 3) {
       counter = 4;
-    } else if (timeCount <= 60000 && counter == 4) {
+    } else if (timeCount < 60000 && counter == 4) {
       counter = 5;
-    } else if (timeCount <= 60000 && counter == 5) {
+    } else if (timeCount < 60000 && counter == 5) {
       counter = 6;
-    } else if (timeCount <= 60000 && counter == 6) {
+    } else if (timeCount < 60000 && counter == 6) {
       counter = 7;
-    } else if (timeCount > 60000 && counter <= 6) {
-      counter = 1;
-    } else if (timeCount >= 300000 && counter == 7) {
-      counter = 1;
     } else {
       currentTime = millis();      
     }
     lcdEmotion(counter);
     timerStart = millis();
   } else {
-    currentTime = millis();
-    if (timeCount < 300000 && counter == 7) {
+    if (timeCount >= 60000 && counter != 7) {
+      counter = 1;
+    } else if (timeCount >= 120000 && counter == 7) {
+      counter = 1;
+    } else if (timeCount < 120000 && counter == 7) {
       lcdEmotion(7);
-      timeCount = currentTime - timerStart;
     } else {
       lcdEmotion(1);
     }
